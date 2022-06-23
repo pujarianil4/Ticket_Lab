@@ -17,7 +17,7 @@ const upload = async (event) => {
     if (typeof file !== 'undefined') {
       try {
         const result = await client.add(file);
-        console.log(result);
+        console.log(image, result);
         setImage(`https://ipfs.infura.io/ipfs/${result.path}`);
         console.log(`https://ipfs.infura.io/ipfs/${result.path}`);
       } catch (error) {
@@ -34,10 +34,10 @@ const upload = async (event) => {
           </div>
           <div className="form_container">
             <div className="form">
-               <input type="text" placeholder="Event Name" onChange={(e) => setName(e.target.value)} />
-               <input type="text" placeholder="No of Tickets to Sell" onChange={(e) => setTicket(e.target.value)}/>
-               <input type="text" placeholder="Price per Ticket" onChange={(e) => setPrice(e.target.value)}/>
-                <textarea rows="4" onChange={(e) => setDescription(e.target.value)}/>
+               <input type="text" value={name} placeholder="Event Name" onChange={(e) => setName(e.target.value)} />
+               <input type="text" value={ticket} placeholder="No of Tickets to Sell" onChange={(e) => setTicket(e.target.value)}/>
+               <input type="text" value={price} placeholder="Price per Ticket" onChange={(e) => setPrice(e.target.value)}/>
+                <textarea rows="4" value={description} onChange={(e) => setDescription(e.target.value)}/>
                 <div >
                 <input type="file" className="file_input" onChange={upload}/>
                 <button>CREATE EVENT</button>
