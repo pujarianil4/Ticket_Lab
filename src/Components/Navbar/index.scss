@@ -1,0 +1,27 @@
+.navbar{
+    height: 80px;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    background-color: rgb(255, 248, 248);
+    .icon, .wallet_connect{
+        margin: auto 20px;
+        height: 100%;
+        display: grid;
+        align-items: center;
+        h1{
+            span{
+                color: #f14105;
+            }
+        }
+    }
+   .wallet_connect{
+    button {
+        padding: 10px 20px;
+        background-color: #f14105;
+        color: white;
+        border: none;
+    }
+   }
+
+}
