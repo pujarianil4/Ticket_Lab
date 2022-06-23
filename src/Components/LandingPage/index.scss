@@ -1,0 +1,60 @@
+.landing_container{
+    height: 80vh;
+    width: 100%;
+    background-color: rgb(255, 248, 248);
+    display: flex;
+    padding: 10px;
+    justify-content: space-evenly;
+
+    div{
+        width: 45%;
+    }
+    .title_container{
+        h1{
+            font-size: 60px;
+            margin-top: 150px;
+            span{
+                color: #f14105;
+            }
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #f14105;
+            color: white;
+            border: none;
+        }
+    }
+    .form_container{
+
+        .form {
+            width: 95%;
+            margin: 80px auto;
+            padding: 10px;
+            input{
+                padding: 10px;
+                width: 95%;
+                margin: 10px 0px;
+            }
+            textarea{
+                padding: 10px;
+                width: 95%;
+                // width: 250px;
+                // margin: 10px 0px;
+            }
+            .file_input{
+               padding: 0px;
+            }
+            div{
+                width: 100%;
+                    display: flex;
+                    margin-top: 20px;
+                    button {
+                        color: white;
+                        background-color: black;
+                        width: 200px;
+                    }
+
+            }
+        }
+    }
+}
