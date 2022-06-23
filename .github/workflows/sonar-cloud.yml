@@ -1,4 +1,5 @@
-
+#   - name: Analyze with SonarCloud
+#        uses: sonarsource/sonarcloud-github-action@master
 name: SonarCloud Scan
 
 on:
@@ -15,8 +16,6 @@ jobs:
     steps:
       - name: Clone Repository
         uses: actions/checkout@v2
-      - name: Analyze with SonarCloud
-        uses: sonarsource/sonarcloud-github-action@master
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
