@@ -4,7 +4,7 @@ import 'antd/dist/antd.css'
 function App() {
   return (
     <div className="App">
-      Hello Ticket Lab CHANGES
+      Hello Ticket Lab 
     </div>
   );
 }
