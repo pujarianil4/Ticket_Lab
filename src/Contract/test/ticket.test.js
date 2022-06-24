@@ -15,10 +15,10 @@ const event = {
 
 
 describe("Ticket", function () {
-    let contract, owner, addr1, addr2;
+    let contract, owner, addr1;
 
     beforeEach(async () => {
-        [owner, addr1, addr2] = await ethers.getSigners();
+        [owner, addr1] = await ethers.getSigners();
         const Ticket = await ethers.getContractFactory("Ticket");
         contract = await Ticket.deploy();
         await contract.deployed();
