@@ -1,7 +1,11 @@
 import React from "react";
+import useAccount from './../../custom/useAccount';
 import { create as ipfsHttpClient } from 'ipfs-http-client';
+import useProvider from "../../custom/useProvider";
+
 import './index.scss'
 
+  
 const client = ipfsHttpClient('https://ipfs.infura.io:5001/api/v0');
 
 const Landing = () => {
@@ -9,7 +13,10 @@ const [name, setName ] = React.useState('')
 const [ticket, setTicket ] = React.useState('')
 const [price, setPrice ] = React.useState('')
 const [description, setDescription ] = React.useState('')
-const [ image, setImage ] = React.useState('');
+const [image, setImage ] = React.useState('');
+const [account , connect ] = useAccount();
+const [contract] = useProvider();
+
 
 const upload = async (event) => {
     event.preventDefault();
@@ -24,7 +31,34 @@ const upload = async (event) => {
         console.error(error);
       }
     }
+  }; 
+
+  const createNft = async () => {
+    try {
+      const result = await client.add(
+        JSON.stringify({ image, price, name, description, ticket })
+      );
+      mint(result);
+    } catch (error) {
+      console.log(error);
+    }
   };
+
+  const mint = async (result) => {
+    console.log("Mint". result);
+    const uri = `https://ipfs.infura.io/ipfs/${result.path}`;
+     await contract.CreateEvent(uri, ticket, price);
+     alert("Minted")
+  };
+
+  const getEvents = async () => {
+    const events = await contract.getAllEvents();
+    console.log("Events", events);
+  }
+  React.useEffect(() => {
+    console.log(contract);
+    getEvents();
+  },[contract])
 
     return(
         <div className="landing_container">
@@ -40,7 +74,8 @@ const upload = async (event) => {
                 <textarea rows="4" value={description} onChange={(e) => setDescription(e.target.value)}/>
                 <div >
                 <input type="file" className="file_input" onChange={upload}/>
-                <button>CREATE EVENT</button>
+               {image && <span>Uploaded</span>}
+                <button onClick={createNft}>CREATE EVENT</button>
                </div>
             </div>
           </div>

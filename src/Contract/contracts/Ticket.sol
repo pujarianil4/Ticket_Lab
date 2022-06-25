@@ -3,13 +3,16 @@
 pragma solidity >=0.7.0 <0.9.0;
 
 import "@openzeppelin/contracts/token/ERC1155/ERC1155.sol";
-import "@openzeppelin/contracts/access/Ownable.sol";
+import "@openzeppelin/contracts/utils/Counters.sol";
 
 /**
  * @title Storage
  * @dev Store & retrieve value in a variable
  */
-contract Ticket is ERC1155, Ownable {
+contract Ticket is ERC1155 {
+   using Counters for Counters.Counter;
+    Counters.Counter public s_nftId;
+
 
     struct Buyer {
         uint256 tokenId;
@@ -26,7 +29,7 @@ contract Ticket is ERC1155, Ownable {
         }
 
     mapping(uint256 => Event) private _events;
-
+    Event[] eventArray;
     mapping(uint256 => Buyer[]) private buyers;
     
     event EventCreated(uint256 indexed id, Event _event);
@@ -34,13 +37,16 @@ contract Ticket is ERC1155, Ownable {
     
     constructor() ERC1155("") {}
 
-     function CreateEvent(uint256 _tokenId, string memory _tokenURI,  uint256 _tickets, uint256 _price)
+     function CreateEvent(string memory _tokenURI,  uint256 _tickets, uint256 _price)
         public
     {
+         s_nftId.increment();
+        uint256 _tokenId = s_nftId.current();
         require(_events[_tokenId].tokenId ==0, "ERC1155: eventAlready Exist with this token" );
          Event memory eventInstance = Event(_tokenId, _tokenURI, _tickets, _price, msg.sender);
          _events[_tokenId]= eventInstance;
         _mint(msg.sender, _tokenId, _tickets, "");
+        eventArray.push(eventInstance);
         emit EventCreated(_tokenId, eventInstance);
     }
 
@@ -58,12 +64,16 @@ contract Ticket is ERC1155, Ownable {
         emit Buy(_tokenId, _buyer);
     }
 
-    function getEvent(uint256 _tokenId) public view returns (Event memory){
+    function getEvent(uint256 _tokenId) external view returns (Event memory){
         return _events[_tokenId];
     }
 
     function getBuyers(uint256 _tokenId) public view returns(Buyer[] memory) {
         return buyers[_tokenId];
+    }
+
+    function getAllEvents() external view returns(Event[] memory) {
+       return eventArray;
     }
 
     function checkAvailableTickets(uint256 _tokenId) public view returns(uint256) {
