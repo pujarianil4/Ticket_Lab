@@ -17,4 +17,4 @@ module.exports = {
     tests: './src/Contract/test',
   },
 };
-//'0e48ab07ef90dec14498607fc16dedb2252e1ddb146c03be5c24c94d242a9f9d',
+// 0x2723dC111bc2AA0ad38341F5DB24f1A2e8A30d11

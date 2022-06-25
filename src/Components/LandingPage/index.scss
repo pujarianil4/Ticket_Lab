@@ -34,12 +34,20 @@
                 padding: 10px;
                 width: 95%;
                 margin: 10px 0px;
+                border: 1px solid lightgrey;
+            }
+            input[type='file']{
+                padding: 10px;
+                width: 40%;
+                margin: 10px 0px;
+                border: 1px solid lightgrey;
             }
             textarea{
                 padding: 10px;
                 width: 95%;
                 // width: 250px;
                 // margin: 10px 0px;
+                border: 1px solid lightgrey;
             }
             .file_input{
                padding: 0px;
@@ -48,13 +56,22 @@
                 width: 100%;
                     display: flex;
                     margin-top: 20px;
+                    
+                    justify-content: space-between;
                     button {
                         color: white;
                         background-color: black;
-                        width: 200px;
+                        width: 150px;
+                        height: 50px;
+                        margin-right: 23px;
+                        margin-top: 10px;
+                        cursor: pointer;
                     }
 
             }
         }
     }
+}
+iframe{
+    display: none;
 }
