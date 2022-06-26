@@ -1,7 +1,7 @@
 
 # TicketLab
 
-The TicketLab is Event management web app which is build on BlockChain technogies link SmartContract and NFTs.
+The TicketLab is Event management web app where you can Buy Sell event tickets as NFT. This app is build on BlockChain technogies link SmartContract and NFTs. 
 
 
 ## Demo
