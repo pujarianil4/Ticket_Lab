@@ -5,6 +5,7 @@ import useAccount from "../../custom/useAccount";
 import useProvider from "../../custom/useProvider";
 import { BigIntToInt } from './../../utils/common'
 import './index.scss'
+import Loader from "../Loader";
 
 const EventDetailPage = () => {
   const [event, setEvent] = React.useState({})
@@ -12,11 +13,13 @@ const EventDetailPage = () => {
   const [sold, setSold] = React.useState('')
   const [availableTickets, setAvailableTickets] = React.useState("")
   const [ticketsTobuy, setTicketsTobuy] = React.useState('1')
+  const [isLoading, setIsLoading] = React.useState(false);
   const { eventID } = useParams();
   const [contract] = useProvider();
   const [account] = useAccount();
 
   const getDeatils = async () => {
+    setIsLoading(true);
     const evt = await contract.getEvent(`${eventID}`);
     const buyers_res = await contract.getBuyers(`${eventID}`)
     const available_res = await contract.checkAvailableTickets(`${eventID}`)
@@ -31,12 +34,15 @@ const EventDetailPage = () => {
       soldTickets += Number(BigIntToInt(iterator.tickets))
     }
     setSold(soldTickets)
+    setIsLoading(false);
   }
 
   const buyTicket = async () => {
     const tx = await contract.buyTicket(ticketsTobuy, `${eventID}`, { value: `${Number(ticketsTobuy) * Number(event.price)}` });
-    tx.wait();
-    message.success(`Congratualtion !, You Purchased ${ticketsTobuy} ticket`)
+    setIsLoading(true);
+    await tx.wait();
+    setIsLoading(false);
+    message.success(`Congratualtion!, You Purchased ${ticketsTobuy} ticket`)
     getDeatils();
   }
 
@@ -49,6 +55,9 @@ const EventDetailPage = () => {
 
   return (
     <>
+    {
+      isLoading && <Loader />
+    }
       <div className="event_container">
         <div className="event_head">
           <div className="img">
