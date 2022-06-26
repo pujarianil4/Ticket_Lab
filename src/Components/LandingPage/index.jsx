@@ -1,6 +1,6 @@
 import React from "react";
 import useAccount from './../../custom/useAccount';
-import { Tooltip } from 'antd';
+import { Tooltip, message } from 'antd';
 import { create as ipfsHttpClient } from 'ipfs-http-client';
 import useProvider from "../../custom/useProvider";
 
@@ -18,18 +18,30 @@ const [price, setPrice ] = React.useState('')
 const [description, setDescription ] = React.useState('')
 const [image, setImage ] = React.useState('');
 const [minted, setMinted] = React.useState(false);
+const [isLoading, setIsLoading] = React.useState(false);
 const [account , connect ] = useAccount();
 const [contract] = useProvider();
 
+const isDisable =() => {
+ console.log( "btn_disable", name && ticket && price & description & image , name , ticket , price , description , image);
+
+ if( name.length > 0 && ticket.length > 0 && price.length >0 && description.length >0 && image.length > 0){
+   return false;
+ } else {
+  return true;
+ }
+}
 
 const upload = async (event) => {
     event.preventDefault();
+    setIsLoading(true);
     const file = event.target.files[0];
     if (typeof file !== 'undefined') {
       try {
         const result = await client.add(file);
-        console.log(image, result);
         setImage(`https://ipfs.infura.io/ipfs/${result.path}`);
+        message.success("Image Uploaded..")
+        setIsLoading(false);
         console.log(`https://ipfs.infura.io/ipfs/${result.path}`);
       } catch (error) {
         console.error(error);
@@ -51,8 +63,10 @@ const upload = async (event) => {
   const mint = async (result) => {
     console.log("Mint". result);
     const uri = `https://ipfs.infura.io/ipfs/${result.path}`;
-     await contract.CreateEvent(uri, ticket, price).wait();
-     alert("Minted");
+    const tx = await contract.CreateEvent(uri, ticket, price);
+
+    await tx.wait();
+     message.success("Event Create..")
      setMinted(!minted)
   };
 
@@ -72,8 +86,9 @@ const upload = async (event) => {
                 <textarea rows="4" value={description} onChange={(e) => setDescription(e.target.value)}/>
                 <div >
                 <input disabled={!account} type="file" className="file_input" onChange={upload}/>
-               {image && <span>Uploaded</span>}
-               <Tooltip title={ account ? "" : "Please Connect Your Wallet For Transation"}  > <button disabled={!account} onClick={createNft}>CREATE EVENT</button> </Tooltip>
+               {isLoading && <span className="msg"> File is Uploading...</span>}
+               {image && <span className="msg_success"> File is Uploaded </span>}
+               <Tooltip title={ account ? "" : "Please Connect Your Wallet For Transation"}  > <button  disabled={!account || isDisable()} onClick={createNft}>CREATE EVENT</button> </Tooltip>
                </div>
             </div>
           </div>

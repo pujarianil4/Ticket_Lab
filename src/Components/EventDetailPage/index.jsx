@@ -1,6 +1,6 @@
 import React from "react";
 import { useParams } from "react-router-dom";
-import { Tooltip } from 'antd';
+import { Tooltip, message } from 'antd';
 import useAccount from "../../custom/useAccount";
 import useProvider from "../../custom/useProvider";
 import { BigIntToInt } from './../../utils/common'
@@ -37,6 +37,7 @@ const EventDetailPage =() => {
     const buyTicket = async () => {
         const tx = await contract.buyTicket(ticketsTobuy, `${eventID}`, { value: `${Number(ticketsTobuy)* Number(event.price)}` });
         tx.wait();
+        message.success(`Congratualtion !, You Purchased ${ticketsTobuy} ticket`)
         getDeatils();
     }
 
