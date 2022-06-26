@@ -10,7 +10,6 @@ contract Ticket is ERC1155 {
    using Counters for Counters.Counter;
     Counters.Counter public s_nftId;
 
-
     struct Buyer {
         uint256 tokenId;
         address addr;
@@ -63,7 +62,7 @@ contract Ticket is ERC1155 {
 
    // buyTicket is use for buying tickets of created event.
    // No of tickets you want , That much NFTs will tranfer to your account.
-   
+
     function buyTicket (uint256 _tickets, uint256 _tokenId) external payable{
         Event memory _event = _events[_tokenId];
 
@@ -97,6 +96,11 @@ contract Ticket is ERC1155 {
 
     function getAllEvents() external view returns(Event[] memory) {
        return eventArray;
+    }
+    
+    // This function will help to see your NFT on opensea
+    function uri( uint256 _tokenId ) override public view returns (string memory) {
+      return _events[_tokenId].tokenURI;
     }
 
     function checkAvailableTickets(uint256 _tokenId) public view returns(uint256) {
