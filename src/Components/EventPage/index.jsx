@@ -3,19 +3,20 @@ import useProvider from "../../custom/useProvider";
 import EventCard from "./EventCard";
 import './index.scss';
 
-const EventPage = () => {
+const EventPage = ({minted}) => {
    const arr = Array(10).fill(0);
    const [eventData, seEventData] = React.useState([]);
    const [contract] = useProvider();
+
+
    const getEvents = async () => {
     const events = await contract.getAllEvents();
     console.log("Events", events);
     seEventData(events)
   }
   React.useEffect(() => {
-    console.log(contract);
     getEvents();
-  },[contract])
+  },[contract, minted])
     return(
         <div className="eventpage_container">
             <div className="title">

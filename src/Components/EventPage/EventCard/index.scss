@@ -7,7 +7,7 @@
     position: relative;
     cursor: pointer;
     span{
-        background-color: red;
+        background-color: #18bfc3;
         color: white;
        position: absolute;
        top: 15px;
@@ -50,19 +50,23 @@
             width: 0;
             height: 100%;
             transition: .5s ease;
-           
             h1{
                 color: white;
                 font-size: 40px;
+                white-space: nowrap;
                 overflow: hidden;
                 text-overflow: ellipsis;
+                width: 90%;
                 margin: 10px 20px;
             }
             p{
                 margin: 10px 20px;
                 font-size: 20px;
+                width: 90%;
+                white-space: nowrap;
                 overflow: hidden;
                 text-overflow: ellipsis;
+                height: 42px; 
             }
         }
     }
