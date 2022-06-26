@@ -21,8 +21,8 @@ const EventDetailPage =() => {
         const buyers_res = await contract.getBuyers(`${eventID}`)
         const available_res = await contract.checkAvailableTickets(`${eventID}`)
 
-        const event = await fetch(evt.tokenURI); 
-        const json = await event.json();
+        const event_res = await fetch(evt.tokenURI); 
+        const json = await event_res.json();
       setEvent(json);
       setBuyers(buyers_res);
       setAvailableTickets(BigIntToInt(available_res))
