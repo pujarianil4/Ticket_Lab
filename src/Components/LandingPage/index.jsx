@@ -23,10 +23,11 @@ const [account] = useAccount();
 const [contract] = useProvider();
 
 const isDisable =() => {
+  let isDisable = true
  if( name.length > 0 && ticket.length > 0 && price.length >0 && description.length >0 && image.length > 0){
-   return false;
+   return isDisable = false;
  } 
- return true;
+ return isDisable;
 }
 
 const upload = async (event) => {
