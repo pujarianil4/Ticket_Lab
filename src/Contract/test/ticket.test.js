@@ -27,11 +27,10 @@ describe("Ticket", function () {
 
     it("Should Create Event with NFT minting", async function () {
 
-        await contract.CreateEvent(event.id, event.uri, event.tickets, event.price);
+        await contract.CreateEvent(event.uri, event.tickets, event.price);
 
         const eventAfterCreation = await contract.getEvent(event.id);
 
-        expect(event.id).to.equal(BigIntToInt(eventAfterCreation.tokenId));
         expect(event.uri).to.equal(eventAfterCreation.tokenURI);
         expect(event.tickets).to.equal(BigIntToInt(eventAfterCreation.tickets));
         expect(event.price).to.equal(BigIntToInt(eventAfterCreation.price));
@@ -42,7 +41,7 @@ describe("Ticket", function () {
     });
 
     it("should ticket buy", async function () {
-        await contract.CreateEvent(event.id, event.uri, event.tickets, event.price);
+        await contract.CreateEvent(event.uri, event.tickets, event.price);
         const ownerNFTBalanceBeforeSell = await contract.balanceOf(owner.address, event.id);
 
         const ticketsToBuy = 10;
