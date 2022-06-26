@@ -4,17 +4,19 @@ import EventCard from "./EventCard";
 import './index.scss';
 
 const EventPage = ({minted}) => {
-   const arr = Array(10).fill(0);
    const [eventData, seEventData] = React.useState([]);
    const [contract] = useProvider();
 
 
-   const getEvents = async () => {
-    const events = await contract.getAllEvents();
-    console.log("Events", events);
-    seEventData(events)
-  }
+ 
   React.useEffect(() => {
+
+    const getEvents = async () => {
+        const events = await contract.getAllEvents();
+        console.log("Events", events);
+        seEventData(events)
+      }
+
     getEvents();
   },[contract, minted])
     return(

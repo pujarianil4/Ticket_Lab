@@ -7,7 +7,6 @@ export default function useAccount (){
     if(window.ethereum){
         window.ethereum.request({method: "eth_requestAccounts"}).then(async (accounts) => {
             setAccount(accounts[0]);
-            // console.log(accounts);
         })
       } else {
           alert('Please Install MetaMask')
@@ -28,8 +27,7 @@ export default function useAccount (){
         method: 'eth_accounts',
       }).then((accounts) => {
         setAccount(accounts[0]);
-        console.log("Accounts", accounts);
-        if(accounts.length == 0){
+        if(accounts.length === 0){
           connect();
         }
       })
