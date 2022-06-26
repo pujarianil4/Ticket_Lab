@@ -6,7 +6,7 @@ module.exports = {
     rinkeby: {
       url: 'https://rinkeby.infura.io/v3/a44ba5a185844cd8b2a0d799c5e773c9',
       accounts: [
-        'cc45764f7d63cfec1a9f1df7aef96e61492253575ede450e3458f3890ab5fb13'
+        `${process.env.REACT_APP_PRIVATE_KEY}`
       ],
     },
   },
