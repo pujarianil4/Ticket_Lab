@@ -28,7 +28,11 @@ export default function useAccount (){
         method: 'eth_accounts',
       }).then((accounts) => {
         setAccount(accounts[0]);
-      });
+        console.log("Accounts", accounts);
+        if(accounts.length == 0){
+          connect();
+        }
+      })
       
   },[])
 

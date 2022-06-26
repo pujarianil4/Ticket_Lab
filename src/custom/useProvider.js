@@ -12,16 +12,17 @@ export default function useProvider (){
 
  const getContract = async () => {
     const signer = await provider.getSigner();
-    const ticketContract = new ethers.Contract(
+    console.log('getContract', signer._address);
+    const ticketContractWithSigner = new ethers.Contract(
         ticketAddr.address,
         Artifact.abi,
-        signer || provider
+        signer 
       );
-      setContract(ticketContract);
+      setContract(ticketContractWithSigner);
  }
 
  React.useEffect(() => {
-    if(!contract) getContract();
+     getContract();
     console.log("Deployed to" , ticketAddr);
  }, [])
 

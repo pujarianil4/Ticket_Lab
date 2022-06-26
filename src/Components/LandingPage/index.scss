@@ -22,6 +22,10 @@
             background-color: #f14105;
             color: white;
             border: none;
+            &:disabled{
+                background-color: gray;
+                cursor: not-allowed;
+            }
         }
     }
     .form_container{
@@ -65,7 +69,13 @@
                         height: 50px;
                         margin-right: 23px;
                         margin-top: 10px;
+                        border: none;
                         cursor: pointer;
+                        &:disabled{
+                            background-color: gray;
+                            cursor: not-allowed;
+                            color: lightgray;
+                        }
                     }
 
             }
