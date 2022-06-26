@@ -1,70 +1,99 @@
-# Getting Started with Create React App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# TicketLab
 
-## Available Scripts
+The TicketLab is Event management web app which is build on BlockChain technogies link SmartContract and NFTs.
 
-In the project directory, you can run:
 
-### `npm start`
+## Demo
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
 
-### `npm test`
+[YouTube](https://youtu.be/Dby3Zs-7iSU "Everything Is AWESOME")
+## Run Locally
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Clone the project
 
-### `npm run build`
+```bash
+  git clone https://github.com/pujarianil4/Ticket_Lab.git
+```
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Go to the project directory
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+```bash
+  cd ticketlab
+```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Install dependencies
 
-### `npm run eject`
+```bash
+  npm install
+```
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+Start the backend server
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+```bash
+  npx hardhat node
+```
+```bash
+  npx hardhat run src/Contract/scripts/deploy.js --network localhost
+```
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+Start the frontend server
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+```bash
+  npm run start
+```
 
-## Learn More
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## Environment Variables
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+To run this project, you will need to add the following environment variables to your .env.local file
 
-### Code Splitting
+`REACT_APP_PRIVATE_KEY`
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+This is Pivate key of metamask wallet account.
 
-### Analyzing the Bundle Size
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+## Running Tests
 
-### Making a Progressive Web App
+To run tests, run the following command
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+```bash
+  npx hardhat test
+```
 
-### Advanced Configuration
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+## Screenshots
+- Landing Page
+![Landing Page](https://bafybeigvon4l7tseefqpteycozaqrjmmm36yhcekky2zzdy3dec3oe4f4q.ipfs.infura-ipfs.io/)
 
-### Deployment
+- Event Listing
+![Event Listing](https://bafybeigrhyydzaazcrjgrct5sdhnsdmol3tybcicep236gioy4tbhkmiv4.ipfs.infura-ipfs.io/)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+- Event Page
+![Event Page](https://bafybeigxmf5esf5b5va2i65auypz3zttsh7kdqhgsb6yag2tsinjx2hifq.ipfs.infura-ipfs.io/)
 
-### `npm run build` fails to minify
+## Features
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+- Connect to Wallet
+- Create an Event with NFT
+- See all Events
+- Buy Ticket as NFT
+
+
+## Tech Stack
+
+**Client:** React, antd, sass, ipfs
+
+**Server:**  BlockChain, SmartContract
+
+
+## Feedback
+
+If you have any feedback, please reach out to us at pujarianil4@gmail.com
+
+
+## Authors
+
+- [@Anil Pujari](https://www.linkedin.com/in/anil-pujari-644282112)
+
