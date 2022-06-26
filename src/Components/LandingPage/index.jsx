@@ -6,6 +6,7 @@ import useProvider from "../../custom/useProvider";
 
 import './index.scss'
 import EventPage from "../EventPage";
+import Loader from "../Loader";
 
 
   
@@ -19,6 +20,7 @@ const [description, setDescription ] = React.useState('')
 const [image, setImage ] = React.useState('');
 const [minted, setMinted] = React.useState(false);
 const [isLoading, setIsLoading] = React.useState(false);
+const [isUploading, setIsUploading] = React.useState(false);
 const [account] = useAccount();
 const [contract] = useProvider();
 
@@ -33,14 +35,14 @@ const isDisable =() => {
 
 const upload = async (event) => {
     event.preventDefault();
-    setIsLoading(true);
+    setIsUploading(true);
     const file = event.target.files[0];
     if (typeof file !== 'undefined') {
       try {
         const result = await client.add(file);
         setImage(`https://ipfs.infura.io/ipfs/${result.path}`);
         message.success("Image Uploaded..")
-        setIsLoading(false);
+        setIsUploading(false);
       } catch (error) {
         console.error(error);
       }
@@ -68,8 +70,9 @@ const upload = async (event) => {
   const mint = async (result) => {
     const uri = `https://ipfs.infura.io/ipfs/${result.path}`;
     const tx = await contract.CreateEvent(uri, ticket, price);
-
+    setIsLoading(true);
     await tx.wait();
+    setIsLoading(false)
      message.success("Event Create..")
      setMinted(!minted)
      setDescription("");
@@ -82,6 +85,9 @@ const upload = async (event) => {
 
     return(
       <>
+      {
+        isLoading && <Loader/>
+      }
         <div className="landing_container">
           <div className="title_container">
             <h1>Discover <span>Events</span> Around You And Buy Tickets As <span>NFTs</span></h1>
@@ -95,7 +101,7 @@ const upload = async (event) => {
                 <textarea rows="4" value={description} onChange={(e) => setDescription(e.target.value)}/>
                 <div >
                 <input disabled={!account} type="file" className="file_input" onChange={upload}/>
-               {isLoading && <span className="msg"> File is Uploading...</span>}
+               {isUploading && <span className="msg"> File is Uploading...</span>}
                {image && <span className="msg_success"> File is Uploaded </span>}
                <Tooltip title={ account ? "" : "Please Connect Your Wallet For Transation"}  > <button  disabled={!account || isDisable()} onClick={createNft}>CREATE EVENT</button> </Tooltip>
                </div>
