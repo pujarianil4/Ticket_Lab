@@ -25,7 +25,7 @@ const [contract] = useProvider();
 const isDisable =() => {
   let isDisable = true
  if( name.length > 0 && ticket.length > 0 && price.length >0 && description.length >0 && image.length > 0){
-   return isDisable = false;
+    isDisable = false;
  } 
  return isDisable;
 }
