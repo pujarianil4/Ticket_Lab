@@ -19,17 +19,14 @@ const [description, setDescription ] = React.useState('')
 const [image, setImage ] = React.useState('');
 const [minted, setMinted] = React.useState(false);
 const [isLoading, setIsLoading] = React.useState(false);
-const [account , connect ] = useAccount();
+const [account] = useAccount();
 const [contract] = useProvider();
 
 const isDisable =() => {
- console.log( "btn_disable", name && ticket && price & description & image , name , ticket , price , description , image);
-
  if( name.length > 0 && ticket.length > 0 && price.length >0 && description.length >0 && image.length > 0){
    return false;
- } else {
-  return true;
- }
+ } 
+ return true;
 }
 
 const upload = async (event) => {
@@ -42,7 +39,6 @@ const upload = async (event) => {
         setImage(`https://ipfs.infura.io/ipfs/${result.path}`);
         message.success("Image Uploaded..")
         setIsLoading(false);
-        console.log(`https://ipfs.infura.io/ipfs/${result.path}`);
       } catch (error) {
         console.error(error);
       }
@@ -60,14 +56,25 @@ const upload = async (event) => {
     }
   };
 
+  const handleSroll = () => {
+    window.scrollTo({
+      top: window.innerHeight,
+      behavior: "smooth"
+    });
+  }
+
   const mint = async (result) => {
-    console.log("Mint". result);
     const uri = `https://ipfs.infura.io/ipfs/${result.path}`;
     const tx = await contract.CreateEvent(uri, ticket, price);
 
     await tx.wait();
      message.success("Event Create..")
      setMinted(!minted)
+     setDescription("");
+     setImage("");
+     setName("");
+     setPrice("");
+     setTicket("")
   };
 
 
@@ -76,7 +83,7 @@ const upload = async (event) => {
         <div className="landing_container">
           <div className="title_container">
             <h1>Discover <span>Events</span> around you</h1>
-            <button>Show Events</button>
+            <button onClick={handleSroll}>Show Events</button>
           </div>
           <div className="form_container">
             <div className="form">

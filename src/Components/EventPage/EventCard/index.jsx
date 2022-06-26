@@ -29,7 +29,7 @@ console.log(eventData, "data");
         <div onClick={handleNavigate} className="card_box">
             <span>Event</span>
           <div className="img">
-            <img src={event.image} alt="image" />
+            <img src={event.image} alt="nft" />
             <div className="overlay">
               <h1> {event.name} </h1>
               <p>  Tickets to Sell: {event.ticket} Tickets </p>

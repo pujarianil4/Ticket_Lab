@@ -9,9 +9,7 @@ const Navbar = () => {
     const handleNavigate = () => {
      navigate(`/`);
    };
-    React.useEffect(() => {
-  console.log('account', account);
-    }, [account])
+
     return(
         <div className="navbar">
             <div className="icon">
