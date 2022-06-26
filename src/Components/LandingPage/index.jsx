@@ -82,7 +82,7 @@ const upload = async (event) => {
       <>
         <div className="landing_container">
           <div className="title_container">
-            <h1>Discover <span>Events</span> around you</h1>
+            <h1>Discover <span>Events</span> Around You And Buy Tickets As <span>NFTs</span></h1>
             <button onClick={handleSroll}>Show Events</button>
           </div>
           <div className="form_container">
