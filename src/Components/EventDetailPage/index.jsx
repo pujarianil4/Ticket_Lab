@@ -18,19 +18,20 @@ const EventDetailPage =() => {
 
     const getDeatils = async () => {
         const evt = await contract.getEvent(`${eventID}`);
-        const buyers = await contract.getBuyers(`${eventID}`)
-        const available = await contract.checkAvailableTickets(`${eventID}`)
+        const buyers_res = await contract.getBuyers(`${eventID}`)
+        const available_res = await contract.checkAvailableTickets(`${eventID}`)
 
         const event = await fetch(evt.tokenURI); 
         const json = await event.json();
       setEvent(json);
-      setBuyers(buyers);
-      setAvailableTickets(BigIntToInt(available))
-      let sold=0;
-       for(let i=0; i < buyers.length; i++){
-        sold += Number(BigIntToInt( buyers[i].tickets))
+      setBuyers(buyers_res);
+      setAvailableTickets(BigIntToInt(available_res))
+      let soldTickets =0;
+       for (const iterator of buyers_res) {
+         console.log("BigIntToInt( buyers_res[i].tickets)", BigIntToInt( iterator.tickets));
+         soldTickets += Number(BigIntToInt( iterator.tickets))
        }
-      setSold(sold)
+      setSold(soldTickets)
     }
 
     const buyTicket = async () => {
